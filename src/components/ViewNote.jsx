@@ -12,12 +12,12 @@ import {
   Label,
 } from 'reactstrap';
 
-const AddNote = () => {
+const ViewNote = () => {
   return (
     <Container className='pt-5'>
       <Card>
         <CardBody>
-          <CardTitle tag='h5'>Añadir nota</CardTitle>
+          <CardTitle tag='h5'>Visualizar nota</CardTitle>
           <Form>
             <FormGroup>
               <Label>Titulo</Label>
@@ -28,9 +28,8 @@ const AddNote = () => {
               <Input name='descripcion' placeholder='Escribe la descripcion' type='textarea' />
             </FormGroup>
             <FormGroup>
-              <Button color='success' outline>Añadir</Button>
-              <Button className='m2' color='danger' outline>
-                <Link to='/'>Cancelar</Link>
+              <Button className='m2' color='primary' outline>
+                <Link to='/'>Regresar</Link>
               </Button>
             </FormGroup>
           </Form>
@@ -40,4 +39,4 @@ const AddNote = () => {
   );
 };
 
-export default AddNote;
+export default ViewNote;

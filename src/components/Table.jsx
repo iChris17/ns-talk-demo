@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Button, Table } from 'reactstrap';
 
 const MainTable = () => {
@@ -19,7 +20,7 @@ const MainTable = () => {
           <td>test</td>
           <td>
             <Button color='primary' outline>
-              Visualizar
+              <Link to={'/ver/id'}>Visualizar</Link>
             </Button>
             <Button color='danger' outline>
               Eliminar
