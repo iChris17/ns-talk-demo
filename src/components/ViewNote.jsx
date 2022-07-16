@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
 import {
   Button,
   Card,
@@ -10,9 +10,34 @@ import {
   FormGroup,
   Input,
   Label,
+  Spinner,
 } from 'reactstrap';
 
+const axios = require('axios').default;
+
 const ViewNote = () => {
+  const [nota, setNota] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const { id } = useParams();
+
+  useEffect(() => {
+    axios
+      .get('https://localhost:5001/api/notes/' + id)
+      .then((result) => {
+        if (result.status === 200) {
+          setNota(result.data);
+        }
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [id]);
+
+  if (loading) {
+    return <Spinner />;
+  }
+
   return (
     <Container className='pt-5'>
       <Card>
@@ -21,11 +46,11 @@ const ViewNote = () => {
           <Form>
             <FormGroup>
               <Label>Titulo</Label>
-              <Input name='titulo' placeholder='Escribe el titulo' type='text' />
+              <Input name='titulo' value={nota.title} readOnly type='text' />
             </FormGroup>
             <FormGroup>
               <Label>Descripcion</Label>
-              <Input name='descripcion' placeholder='Escribe la descripcion' type='textarea' />
+              <Input name='descripcion' value={nota.body} readOnly type='textarea' />
             </FormGroup>
             <FormGroup>
               <Button className='m2' color='primary' outline>
